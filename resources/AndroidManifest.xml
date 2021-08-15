@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" android:sharedUserId="android.uid.system" android:versionCode="1" android:versionName="1.0" android:compileSdkVersion="28" android:compileSdkVersionCodename="9" package="com.wits.ksw.airc" platformBuildVersionCode="1" platformBuildVersionName="1">
+    <uses-sdk android:minSdkVersion="21" android:targetSdkVersion="28"/>
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
+    <application android:theme="@style/AppTheme" android:label="@string/app_name" android:icon="@mipmap/ic_launcher" android:name="com.wits.ksw.airc.KswAirApplication" android:persistent="true" android:debuggable="true" android:allowBackup="true" android:supportsRtl="true" android:directBootAware="true" android:roundIcon="@mipmap/ic_launcher_round" android:appComponentFactory="android.support.v4.app.CoreComponentFactory">
+        <activity android:name="com.wits.ksw.airc.LexusAirControl">
+            <intent-filter>
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
+        <receiver android:name="com.wits.ksw.airc.BootReceiver" android:directBootAware="true">
+            <intent-filter>
+                <action android:name="com.wits.boot.Start"/>
+                <action android:name="android.intent.action.BOOT_COMPLETED"/>
+            </intent-filter>
+        </receiver>
+        <service android:name="com.wits.ksw.airc.AircService" android:exported="true">
+            <intent-filter>
+                <action android:name="com.wits.ksw.intent.action.AIR_CONDITIONER_CHANGE"/>
+            </intent-filter>
+        </service>
+        <provider android:name="android.arch.lifecycle.ProcessLifecycleOwnerInitializer" android:exported="false" android:multiprocess="true" android:authorities="com.wits.ksw.airc.lifecycle-trojan"/>
+    </application>
+</manifest>
